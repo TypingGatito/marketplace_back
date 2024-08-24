@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html en="ru">
 <head>
     <title>Products</title>
 </head>
 
 <body>
-<h1>Marketplace</h1>
+<h1>Marketplace | <a href="/users/login">Войти</a></h1>
 <hr>
 <h4>Товары</h4>
 
@@ -58,7 +58,7 @@
     <label for="file3">Фотография 3</label>
     <input type="file" id="file3" name="file3">
     <br>
-    <button type="submit">Create Product</button>
+    <button type="submit">Добавить товар</button>
 </form>
 </body>
 </html>

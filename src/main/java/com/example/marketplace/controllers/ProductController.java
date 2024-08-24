@@ -2,7 +2,6 @@ package com.example.marketplace.controllers;
 
 import com.example.marketplace.models.Product;
 import com.example.marketplace.services.ProductService;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,6 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @RequestMapping("/product")
 public class ProductController {
-    @NonNull
     private final ProductService productService;
 
     @GetMapping()
