@@ -52,4 +52,14 @@ public class Product {
         image.setProduct(this);
         images.add(image);
     }
+
+    @Override
+    public String toString() {
+        String imagesId = this.getImages().stream()
+                .map(Image::getId)
+                .toString();
+        String usersId = this.getUser().getUsername();
+        return "Product(id=" + this.getId() + ", title=" + this.getTitle() + ", description=" + this.getDescription() + ", price=" + this.getPrice() + ", city=" + this.getCity() + ", images=" + imagesId + ", previewImageId=" + this.getPreviewImageId() + ", timeOfCreation=" + this.getTimeOfCreation() + ", user=" + usersId+ ")";
+    }
+
 }

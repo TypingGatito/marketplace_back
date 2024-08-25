@@ -39,7 +39,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/product/**", "/images/**",
-                                "/users/registration").permitAll()
+                                "/users/registration", "/users/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

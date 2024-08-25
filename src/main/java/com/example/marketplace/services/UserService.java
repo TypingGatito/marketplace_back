@@ -30,4 +30,8 @@ public class UserService {
         log.info("User created with email: {}", user.getEmail());
         return true;
     }
+
+    public User getById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 }

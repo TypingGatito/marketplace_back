@@ -25,10 +25,7 @@
 <p>${product.city}</p>
 
 <p>Автор</p>
-<p>${product.user.email}</p>
-
-<p>Номер телефона</p>
-<p>${product.user.phoneNumber}</p>
+<a href="/users/${product.user.id}">${product.user.name}</a>
 
 <hr>
 <#--<form action="/product/delete/${product.id}" method="post">
