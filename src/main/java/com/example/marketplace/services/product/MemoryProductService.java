@@ -1,4 +1,4 @@
-package com.example.marketplace.services;
+package com.example.marketplace.services.product;
 
 import com.example.marketplace.models.Product;
 import lombok.RequiredArgsConstructor;

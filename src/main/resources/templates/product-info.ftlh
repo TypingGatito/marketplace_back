@@ -25,11 +25,14 @@
 <p>${product.city}</p>
 
 <p>Автор</p>
-<p>${product.author}</p>
+<p>${product.user.email}</p>
+
+<p>Номер телефона</p>
+<p>${product.user.phoneNumber}</p>
 
 <hr>
-<form action="/product/delete/${product.id}" method="post">
+<#--<form action="/product/delete/${product.id}" method="post">
     <input type="submit" value="Удалить товар">
-</form>
+</form>-->
 </body>
 </html>
