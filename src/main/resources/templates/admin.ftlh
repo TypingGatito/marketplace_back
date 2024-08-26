@@ -25,13 +25,13 @@
             <th><#if user.active>true <#else> false</#if></th>
             <th><#list user.roles as role>${role}<#sep>, </#list></th>
             <th>
-                <form action="admin/user/ban/${user.id}" method="post">
+                <form action="admin/user/ban/${user.id?c}" method="post">
                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                     <input type="submit" value="Бан">
                 </form>
             </th>
-            <th><a href="/admin/user/edit/${user.id}">Редактировать</a></th>
-            <th><a href="users/${user.id}">Подробнее</a></th>
+            <th><a href="/admin/user/edit/${user.id?c}">Редактировать</a></th>
+            <th><a href="users/${user.id?c}">Подробнее</a></th>
         </tr>
     <#else>
         <h3>Пользователей нет</h3>
