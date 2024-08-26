@@ -52,6 +52,8 @@ public class User implements UserDetails {
         dateOfCreated = LocalDateTime.now();
     }
 
+    public boolean isAdmin() {return roles.contains(Role.ADMIN);}
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

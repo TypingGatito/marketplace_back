@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -23,7 +26,8 @@ public class UserService {
         }
 
         user.setActive(true);
-        user.getRoles().add(Role.USER);
+        ///user.getRoles().add(Role.USER);
+        user.getRoles().add(Role.ADMIN);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
@@ -33,5 +37,20 @@ public class UserService {
 
     public User getById(Long id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
+
+    public void userBan(Long userId) {
+        User user = getById(userId);
+
+        if (user != null) {
+            user.setActive(false);
+            log.info("User banned with id: {}", userId);
+        }
+
+        userRepository.save(user);
     }
 }

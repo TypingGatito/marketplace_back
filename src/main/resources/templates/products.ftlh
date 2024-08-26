@@ -13,6 +13,10 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <button type="submit">Выйти</button>
     </form>
+
+    <#if user.isAdmin()>
+        <a href="/admin">Панель администратора</a>
+    </#if>
 <#else>
     <a href="/users/login">Войти</a>
 </#if>
