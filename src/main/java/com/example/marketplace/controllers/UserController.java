@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
@@ -16,12 +18,14 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Principal principal, Model model) {
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "login";
     }
 
     @GetMapping("/registration")
-    public String registration() {
+    public String registration(Principal principal, Model model) {
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "registration";
     }
 
@@ -30,20 +34,25 @@ public class UserController {
     public String createUser(User user, Model model) {
         if(!userService.createUser(user)) {
             model.addAttribute("errorMessage", "User creation failed");
+            return "registration";
         }
 
         return "redirect:/users/login";
     }
 
-    @GetMapping("/hello")
-    public String securityUrl() {
-        return "hello";
+    @GetMapping("/profile")
+    public String profile(Principal principal,
+                          Model model) {
+        User user = userService.getUserByPrincipal(principal);
+        model.addAttribute("user", user);
+        return "profile";
     }
 
     @GetMapping("/{id}")
-    public String userInfo(@PathVariable("id") Long id, Model model) {
+    public String userInfo(@PathVariable("id") Long id, Model model, Principal principal) {
         User user = userService.getById(id);
         model.addAttribute("user", user);
+        model.addAttribute("userByPrincipal", userService.getUserByPrincipal(principal));
         model.addAttribute("products", user.getProducts());
 
         return "user-info";

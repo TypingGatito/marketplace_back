@@ -1,6 +1,8 @@
 package com.example.marketplace.controllers;
 
 import com.example.marketplace.models.Product;
+import com.example.marketplace.models.User;
+import com.example.marketplace.services.UserService;
 import com.example.marketplace.services.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,14 +17,26 @@ import java.security.Principal;
 @RequestMapping("/product")
 public class ProductController {
     private final ProductService productService;
+    private final UserService userService;
 
-    @GetMapping()
-    public String products(@RequestParam(name="title", required = false) String title,
+    @GetMapping("")
+    public String products(@RequestParam(name= "searchWord", required = false) String title,
                            Model model,
                            Principal principal) {
         model.addAttribute("products", productService.products(title));
         model.addAttribute("user", productService.getUserByPrincipal(principal));
+        model.addAttribute("title", title);
         return "products";
+    }
+
+    @GetMapping("/{id}")
+    public String productInfo(@PathVariable Long id, Model model, Principal principal) {
+        Product product = productService.get(id);
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("product", product);
+        model.addAttribute("images", product.getImages());
+        model.addAttribute("authorProduct", product.getUser());
+        return "product-info";
     }
 
     @PostMapping("/create")
@@ -42,11 +56,11 @@ public class ProductController {
         return "redirect:/product";
     }
 
-    @GetMapping("/{id}")
-    public String productInfo(@PathVariable Long id, Model model) {
-        Product product = productService.get(id);
-        model.addAttribute("product", product);
-        model.addAttribute("images", product.getImages());
-        return "product-info";
+    @GetMapping("/my/products")
+    public String userProducts(Principal principal, Model model) {
+        User user = productService.getUserByPrincipal(principal);
+        model.addAttribute("user", user);
+        model.addAttribute("products", user.getProducts());
+        return "my-products";
     }
 }

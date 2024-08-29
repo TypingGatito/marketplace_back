@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -59,7 +59,7 @@ public class Product {
                 .map(Image::getId)
                 .toString();
         String usersId = this.getUser().getUsername();
-        return "Product(id=" + this.getId() + ", title=" + this.getTitle() + ", description=" + this.getDescription() + ", price=" + this.getPrice() + ", city=" + this.getCity() + ", images=" + imagesId + ", previewImageId=" + this.getPreviewImageId() + ", timeOfCreation=" + this.getTimeOfCreation() + ", user=" + usersId+ ")";
+        return "Product(id=" + this.getId() + ", title=" + this.getTitle() + ", description=" + this.getDescription() + ", price=" + this.getPrice() + ", city=" + this.getCity() + ", images=" + imagesId + ", previewImageId=" + this.getPreviewImageId() + ", timeOfCreation=" + this.getTimeOfCreation() + ", userToEdit=" + usersId+ ")";
     }
 
 }
