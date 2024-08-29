@@ -17,12 +17,12 @@
     <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <a href="/">
+            <a href="/product">
                 <span class="navbar-brand mb-0 h1">Marketplace</span>
             </a>
             <#if user.email??>
                 <div class="dropdown text-end">
-                    <a href="/profile">
+                    <a href="/users/profile">
                         <img src="/static/images/avatar.png" alt="mdo"
                              width="32" height="32" class="rounded-circle">
                     </a>

@@ -15,16 +15,16 @@
             <tr>
                 <th>${user.email}</th>
                 <th>${user.phoneNumber}</th>
-                <th><#if user.active>true<#else>false</#if></th>
+                <th><#if user.active>Активен<#else>Забанен</#if></th>
                 <th><#list user.roles as role>${role}</#list></th>
                 <th>
-                    <form action="/admin/user/ban/${user.id}" method="post">
+                    <form action="/admin/user/ban/${user.id?c}" method="post">
                         <input type="hidden" name="_csrf" value="${_csrf.token}">
-                        <input type="submit" class="btn btn-light" value="Бан">
+                        <input type="submit" class="btn btn-light" <#if user.active>value="Бан"<#else>value="Разбан"</#if>>
                     </form>
                 </th>
-                <th><a href="/admin/user/edit/${user.id}">Редактировние</a></th>
-                <th><a href="/user/${user.id}">Подробная информация</a></th>
+                <th><a href="/admin/user/edit/${user.id?c}">Редактировние</a></th>
+                <th><a href="/users/${user.id?c}">Подробная информация</a></th>
             </tr>
         <#else>
             <h3>Пользователей нет</h3>
